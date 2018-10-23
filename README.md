@@ -1,8 +1,16 @@
 # SimpleDrawing
 
+
+[![Build Status](https://travis-ci.org/scheinerman/SimpleDrawing.jl.svg?branch=master)](https://travis-ci.org/scheinerman/SimpleDrawing.jl)
+
+
+[![codecov.io](http://codecov.io/github/scheinerman/SimpleDrawing.jl/coverage.svg?branch=master)](http://codecov.io/github/scheinerman/SimpleDrawing.jl?branch=master)
+
+
+
 This package provides some convenient drawing tools derived from the
 `Plots` module. It also defines the `draw()` function that can be extended
-by other modules including `DrawSimpleGraphs`, `HyperbolicPlane`, and
+by other modules including `DrawSimpleGraphs`, `SimpleDrawing`, and
 (under development) poset drawing for `SimplePosets`.
 
 ## Functions
