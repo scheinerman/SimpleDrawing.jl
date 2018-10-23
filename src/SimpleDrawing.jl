@@ -1,5 +1,5 @@
 module SimpleDrawing
-using Plots
+using Plots, LinearAlgebra
 
 export newdraw, draw_circle, draw_arc, draw_segment, draw_point, finish
 export draw
@@ -104,6 +104,45 @@ It removes the axes and the grid lines, and sets the aspect ratio to one.
 function finish()
     plot!(aspectratio=1, legend=false, axis=false, grid=false)
 end
+
+
+
+
+export find_center, non_colinear_check
+
+"""
+`find_center(a,b,c)`: Given three points in the complex plane,
+find the point `z` that is equidistant from all three. If the three
+points are collinear then return `Inf + Inf*im`.
+"""
+function find_center(a::Complex, b::Complex, c::Complex)::Complex
+    if !non_colinear_check(a,b,c)
+        return Inf + im*Inf
+    end
+    A = collect(reim(a))
+    B = collect(reim(b))
+    C = collect(reim(c))
+    AB = 0.5*(A+B)
+    BC = 0.5*(B+C)
+    M = [(A-B)'; (B-C)']
+    rhs = [dot(AB,A-B), dot(BC,B-C)]
+
+    Z = M\rhs
+    return Z[1] + im*Z[2]
+end
+
+"""
+`non_colinear_check(a,b,c)`: test if the complex numbers are distinct
+and noncollinear.
+"""
+function non_colinear_check(a::Complex,b::Complex, c::Complex)::Bool
+    if a==b || b==c || a==c
+        return false
+    end
+    z = (b-a)/(c-a)
+    return imag(z) != 0
+end
+
 
 
 end
