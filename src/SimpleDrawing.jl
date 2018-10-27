@@ -2,6 +2,7 @@ module SimpleDrawing
 using Plots, LinearAlgebra
 
 export newdraw, draw_circle, draw_arc, draw_segment, draw_point, finish
+export find_center, non_colinear_check
 export draw
 
 """
@@ -57,7 +58,7 @@ end
 `draw_arc(a,b,c)` where the arguments are `Complex`: Draw the
 arc from `a` through `b` to `c`.
 """
-function draw_arc(a::Complex, b::Complex, c::Complex)
+function draw_arc(a::Complex, b::Complex, c::Complex; opts...)
     m2pi(x::Real) = mod(x,2π)
 
     z = find_center(a,b,c)
@@ -73,11 +74,11 @@ function draw_arc(a::Complex, b::Complex, c::Complex)
 
 
     if ta<tb<tc
-        return draw_arc(x,y,r,ta,tc)
+        return draw_arc(x,y,r,ta,tc; opts...)
     end
 
 
-    return draw_arc(x,y,r,tc-2pi,ta)
+    return draw_arc(x,y,r,tc-2pi,ta; opts...)
 end
 
 
