@@ -1,9 +1,9 @@
 module SimpleDrawing
 using Plots, LinearAlgebra
 
-export newdraw, draw_circle, draw_arc, draw_segment, draw_point, finish
+export newdraw, draw_circle, draw_arc, draw_segment, draw_point
 export find_center, non_colinear_check
-export draw
+export finish
 
 """
 `newdraw()` clears the screen and sets up a blank drawing canvas with
