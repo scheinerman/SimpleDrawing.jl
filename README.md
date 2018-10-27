@@ -10,7 +10,7 @@
 
 This package provides some convenient drawing tools derived from the
 `Plots` module. It also defines the `draw()` function that can be extended
-by other modules including `DrawSimpleGraphs`, `SimpleDrawing`, and
+by other modules including `DrawSimpleGraphs`, `HyperbolicPlane`, and
 (under development) poset drawing for `SimplePosets`.
 
 ## Functions
