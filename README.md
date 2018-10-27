@@ -48,8 +48,3 @@ the three points (represented as complex numbers). Returns
 + `non_collinear_check(a,b,c)` checks if the three points (represented as
   complex numbers) are noncollinear; returns `true` if so and `false` if they
   are collinear (including if two are the same).
-
-## Issues
-
-At this time, `draw_arc(a,b,c)` will draw the shorter arc from `a` to `c`
-of the circle containing the three points; that might omit `b`.
