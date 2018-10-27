@@ -48,3 +48,17 @@ the three points (represented as complex numbers). Returns
 + `non_collinear_check(a,b,c)` checks if the three points (represented as
   complex numbers) are noncollinear; returns `true` if so and `false` if they
   are collinear (including if two are the same).
+
+## Example
+
+```
+using SimpleDrawing, Plots
+
+newdraw()
+draw_circle(1,1,2; color=:red)
+draw_arc(2,1,1,0,pi; color=:blue, linestyle=:dash)
+draw_segment(-1+im,1+im; color=:green, linestyle=:dot)
+savefig("example.png")
+```
+
+![](/example.png)

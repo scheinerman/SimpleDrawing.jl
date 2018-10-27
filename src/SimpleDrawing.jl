@@ -25,7 +25,13 @@ function draw_circle(x::Real, y::Real, r::Real; opts...)
     plot!(f,g,0,2pi;opts...)
 end
 
+draw_circle(z::Complex, r::Real; opts...) =
+    draw_circle(real(z), imag(z), r; opts...)
 
+"""
+`draw_circle(a,b,c)` draws a circle through the points given by
+the three complex arguments.
+"""
 function draw_circle(a::Complex, b::Complex, c::Complex; opts...)
     z = find_center(a,b,c)
     r = abs(a-z)
@@ -60,9 +66,6 @@ function draw_arc(a::Complex, b::Complex, c::Complex)
     ta = m2pi(angle(a-z))
     tb = m2pi(angle(b-z))
     tc = m2pi(angle(c-z))
-
-    println((ta,tb,tc))
-
 
     if ta > tc
         ta,tc = tc,ta
