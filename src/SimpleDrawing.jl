@@ -42,34 +42,39 @@ function draw_arc(x::Real, y::Real, r::Real, t1::Real, t2::Real; opts...)
     f(t) = r*cos(t) + x
     g(t) = r*sin(t) + y
 
-    t1 = mod(t1, 2pi)
-    t2 = mod(t2, 2pi)
-
-    if t1==t2
-        return
-    end
-
-    if t1 > t2
-        t1,t2 = t2,t1
-    end
-
-    if t2-t1>pi
-        t1 += 2pi
-    end
-
     plot!(f,g,t1,t2;opts...)
 end
+
+
 
 """
 `draw_arc(a,b,c)` where the arguments are `Complex`: Draw the
 arc from `a` through `b` to `c`.
 """
-function draw_arc(a::Complex, b::Complex, c::Complex; opts...)
+function draw_arc(a::Complex, b::Complex, c::Complex)
+    m2pi(x::Real) = mod(x,2π)
+
     z = find_center(a,b,c)
+    x,y = reim(z)
     r = abs(b-z)
-    t1 = angle(a-z)
-    t2 = angle(c-z)
-    draw_arc(real(z), imag(z), r, t1, t2; opts...)
+    ta = m2pi(angle(a-z))
+    tb = m2pi(angle(b-z))
+    tc = m2pi(angle(c-z))
+
+    println((ta,tb,tc))
+
+
+    if ta > tc
+        ta,tc = tc,ta
+    end
+
+
+    if ta<tb<tc
+        return draw_arc(x,y,r,ta,tc)
+    end
+
+
+    return draw_arc(x,y,r,tc-2pi,ta)
 end
 
 
