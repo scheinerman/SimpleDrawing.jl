@@ -3,7 +3,7 @@ using Plots, LinearAlgebra
 
 export newdraw, draw_circle, draw_arc, draw_segment, draw_point
 export find_center, non_colinear_check
-export finish
+export finish, draw
 
 """
 `newdraw()` clears the screen and sets up a blank drawing canvas with
