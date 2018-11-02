@@ -35,14 +35,12 @@ function open_spline(y::Array{T,1}) where T<:Number
 
     rhs = 3(y[2:end] - y[1:end-1])
 
-    println(M)
-    println(rhs)
-
     D = M\rhs
 
-    println(D)
-
-    a = b = c = d = zeros(n-1)
+    a = zeros(n-1)
+    b = zeros(n-1)
+    c = zeros(n-1)
+    d = zeros(n-1)
 
     for j=1:n-1
         a[j] = y[j]
