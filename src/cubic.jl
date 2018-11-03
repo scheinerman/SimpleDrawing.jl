@@ -1,3 +1,7 @@
+# export Cubic, Spline, npatches
+
+import Base: getindex
+
 """
 `Cubic(a,b,c,d)` is a 3rd degree polynomial `a+bx+cx^2+dx^3`.
 Use `f(x)` to evalue `f` at the value `x`.
@@ -17,7 +21,27 @@ of `f`.
 """
 Base.adjoint(f::Cubic) = Cubic(f.b,2f.c,3f.d,0)
 
+struct Spline
+    patches::Array{Cubic,1}
+end
 
+function npatches(S::Spline)
+    return length(S.patches)
+end
+
+getindex(S::Spline, idx::Int) = S.patches[idx]
+
+function (S::Spline)(x::Real)
+    np = npatches(S)
+    @assert (x>=1)&&(x<=np+1) "argument must be between 1 and $(np+1)"
+
+    p = Int(floor(x))
+    if p == np+1
+        p = np
+    end
+    f = S[p]
+    return f(x-p)
+end
 
 function open_spline(y::Array{T,1}) where T<:Number
     n = length(y)-1
@@ -37,10 +61,10 @@ function open_spline(y::Array{T,1}) where T<:Number
 
     D = M\rhs
 
-    a = zeros(n-1)
-    b = zeros(n-1)
-    c = zeros(n-1)
-    d = zeros(n-1)
+    a = zeros(Number,n-1)
+    b = zeros(Number,n-1)
+    c = zeros(Number,n-1)
+    d = zeros(Number,n-1)
 
     for j=1:n-1
         a[j] = y[j]
@@ -50,8 +74,5 @@ function open_spline(y::Array{T,1}) where T<:Number
     end
 
 
-    return [ Cubic(a[i],b[i],c[i],d[i]) for i=1:n-1 ]
-
-
-
+    Spline( [ Cubic(a[i],b[i],c[i],d[i]) for i=1:n-1 ] )
 end
