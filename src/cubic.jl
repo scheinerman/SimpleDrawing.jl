@@ -1,4 +1,4 @@
-# export Cubic, Spline, npatches
+export Cubic, Spline, npatches
 
 
 # see http://mathworld.wolfram.com/CubicSpline.html
