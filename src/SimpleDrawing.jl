@@ -152,6 +152,7 @@ function non_colinear_check(a::Complex,b::Complex, c::Complex)::Bool
     return imag(z) != 0
 end
 
+include("cubic.jl")
 
 
 end

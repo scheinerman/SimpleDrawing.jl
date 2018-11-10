@@ -1,5 +1,4 @@
-# export Cubic, Spline, npatches
-
+export Cubic, Spline, npatches, funk
 
 # see http://mathworld.wolfram.com/CubicSpline.html
 
@@ -19,7 +18,7 @@ end
 (f::Cubic)(x::Number) = f.a + x*(f.b + x*(f.c+x*f.d))
 
 """
-`f'` where `f` is a `Cubic` is a new cubic that is the derivative
+`f'` where `f` is a `Cubic` or `Spline` is the derivative
 of `f`.
 """
 Base.adjoint(f::Cubic) = Cubic(f.b,2f.c,3f.d,0)
@@ -37,12 +36,26 @@ function Base.adjoint(S::Spline)
     return Spline(plist,S.closed)
 end
 
+"""
+`Spline(vals,kind)` returns a cubic spline based on the values in `vals`.
+The resulting spline `S` will have the property that `S(1)==y[1]`,
+`S(2)==y[2]`, and so on up to `S(n)==y[n]` where `n` is the length of `y`.
 
-function Spline(y::Array{T,1}) where T<:Number
-    if y[1] == y[end]
++ If `kind` is `:open` then the second derivatives at the end points will be zero. (This is the default.)
++ If `kind` is `:closed` then we assume that we are interpolating a periodic function where `S(n+1)==S(1)`.
+"""
+function Spline(y::Array{T,1},kind::Symbol=:open)::Spline where T<:Number
+    n = length(y)
+    if kind == :open
+        @assert n>2 "Open splines must have at least three points"
+        return open_spline(y)
+    end
+    if kind == :closed
+        @assert n>3 "Closed splines must have at least four points"
         return closed_spline(y)
     end
-    return open_spline(y)
+
+    error("Spline type must be :open or :closed, not $kind")
 end
 
 function npatches(S::Spline)
@@ -57,30 +70,39 @@ end
 
 getindex(S::Spline, idx::Int) = S.patches[idx]
 
+"""
+`funk(S)` converts the Spline `S` into a callable function
+(e.g., that can be passed to `plot`).
+"""
 function funk(S)::Function
     return x -> S(x)
 end
 
 function (S::Spline)(x::Real)
     np = npatches(S)
-    p = Int(floor(x))
 
     if is_closed(S)
-        x = mod(x,np+1)
+
+        p = Int(floor(x))
+        x = mod(x,np)
         p = Int(floor(x))
 
         if p==0
             p = np
+            x += np
         end
         f = S[p]
         return f(x-p)
     end
 
+    # open spline
+    p = Int(floor(x))
+    if x < 1
+        p = 1
+    end
+
     if p > np
         p = np
-    end
-    if p < 1
-        p= 1
     end
     f = S[p]
     return f(x-p)
@@ -127,69 +149,12 @@ end
 function closed_spline(y::Array{T,1})::Spline where T <: Number
     yy = copy(y)
     n = length(y)
-    prepend!(yy,y[end-1:end])
-    append!(yy,y[1:2])
-
-    println(yy)
+    prepend!(yy,y[end-3:end])
+    append!(yy,y[1:4])
 
     S = open_spline(yy)
 
-    plist = S.patches[3:n+2]
+    plist = S.patches[5:end-3]
     return Spline(plist,true)
 
 end
-
-#
-# function old_closed_spline(y::Array{T,1})::Spline where T <: Number
-#     DEBUG = true
-#     y = copy(y)
-#     append!(y,y[1])
-#     n = length(y)
-#     M = zeros(n,n)
-#     for i=1:n
-#         M[i,i] = 4
-#     end
-#
-#     for i=1:n-1
-#         M[i,i+1] = 1
-#         M[i+1,i] = 1
-#     end
-#
-#     M[1,n] = 1
-#     M[n,1] = 1
-#
-#     if DEBUG
-#         display(M)
-#     end
-#
-#     rhs = zeros(Number,n)
-#     rhs[1] = 3*(y[2]-y[n])
-#     for k=2:n-1
-#         rhs[k] = 3*(y[k+1]-y[k-1])
-#     end
-#     rhs[n] = 3(y[1]-y[n-1])
-#
-#     if DEBUG
-#         display(rhs)
-#     end
-#
-#
-#     D = M\rhs
-#
-#     if DEBUG
-#         println(D)
-#     end
-#
-#     a = zeros(Number,n-1)
-#     b = zeros(Number,n-1)
-#     c = zeros(Number,n-1)
-#     d = zeros(Number,n-1)
-#
-#     for j=1:n-1
-#         a[j] = y[j]
-#         b[j] = D[j]
-#         c[j] = 3*(y[j+1]-y[j])-2D[j]-D[j+1]
-#         d[j] = 2*(y[j]-y[j+1])+D[j]+D[j+1]
-#     end
-#     return Spline( [ Cubic(a[i],b[i],c[i],d[i]) for i=1:n-1 ], true )
-# end
