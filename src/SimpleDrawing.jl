@@ -103,8 +103,9 @@ end
 
 draw_point(z::Complex; opts...) = draw_point(real(z),imag(z); opts...)
 
-
-
+function draw_point(p::Array{Complex{T},1};opts...) where T
+    plot!(real.(p),imag.(p),line=false,marker=1;opts...)
+end
 
 """
 `finish()` is used to clean up a drawing after various calls to `draw`.
@@ -113,7 +114,6 @@ It removes the axes and the grid lines, and sets the aspect ratio to one.
 function finish()
     plot!(aspectratio=1, legend=false, axis=false, grid=false)
 end
-
 
 
 
@@ -153,6 +153,7 @@ function non_colinear_check(a::Complex,b::Complex, c::Complex)::Bool
 end
 
 include("cubic.jl")
+include("curve.jl")
 
 
 end
