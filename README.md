@@ -15,15 +15,28 @@ by other modules including `DrawSimpleGraphs`, `HyperbolicPlane`, and
 
 ## Functions
 
+#### General
+
 + `newdraw()` presents a blank canvas on which to draw (and erases anything
 that's already in that window).
++ `finish()` ensures that the figure appears on the screen with
+aspect ratio equal to 1, and that
+we hide the axes, grid, and legend.
++ `draw()` does nothing. It is a placeholder function for other modules to
+override.
 
+#### Drawing Specific Shapes
 + `draw_point(x::Real,y::Real;opts...)` plots a point (small disk). This
 may also be invoked as `draw_point(z::Complex)`. If `plist` is a list of
 complex numbers, may also use `draw_point(plist)` to draw all those points.
 + `draw_segment(x::Real,y::Real,xx::Real,yy::Real;opts...)` draws a
 line segment from `(x,y)` to `(xx,yy)`. May also be invoked as
 `draw_segment(z::Complex,zz::Complex)`.
++ `draw_vector(x::Real,y::Real)` draws a vector from `(0,0)` to `(x,y)`. A
+different base point may be specified `draw_vector(x,y,basex,basey)` in which
+case the vector starts at `(basex,basey)` and extends to `(basex+x,basey+y)`.
+This may also be used with complex arguments: `draw_vector(z)` and
+`draw_vector(z, basez)`.
 + `draw_arc(x::Real,y::Real,r::Real,t1::Real,t2::Real;opts...)` draws an
 arc of a circle centered at `(x,y)`, with radius `r`, and arcing between
 angles `t1` and `t2`.
@@ -35,15 +48,9 @@ at `(x,y)` with radius `r`. Also `draw_circle(z::Complex,r::Real;opts...)`.
 one-dimensional array of complex numbers. By default, this gives a closed curve.
 To draw an open curve, use `draw(pts,false;opts...)`
 
-+ `finish()` ensures that the figure appears on the screen with
-aspect ratio equal to 1, and that
-we hide the axes, grid, and legend.
 
 
-+ `draw()` does nothing. It is a placeholder function for other modules to
-override.
-
-### Supporting Functions
+#### Supporting Functions
 
 + `find_center(a,b,c)` returns the center of the circle that passes through
 the three points (represented as complex numbers). Returns

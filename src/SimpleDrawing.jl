@@ -1,7 +1,7 @@
 module SimpleDrawing
 using Plots, LinearAlgebra
 
-export newdraw, draw_circle, draw_arc, draw_segment, draw_point
+export newdraw, draw_circle, draw_arc, draw_segment, draw_point, draw_vector
 export find_center, non_colinear_check
 export finish, draw
 
@@ -97,15 +97,46 @@ function draw_segment(a::Complex, b::Complex; opts...)
     draw_segment(x,y,xx,yy; opts...)
 end
 
+
+"""
+`draw_point(x,y)` [or `draw_point(z)`] draws a point at coordinates `(x,y)`
+[or complex location `z`].
+
+`draw_point(list)` plots all the points in the one-dimensional `list` of
+complex values.
+"""
 function draw_point(x::Real, y::Real; opts...)
-    plot!([x],[y];opts...)
+    plot!([x],[y];marker=1,opts...)
 end
 
 draw_point(z::Complex; opts...) = draw_point(real(z),imag(z); opts...)
 
-function draw_point(p::Array{Complex{T},1};opts...) where T
-    plot!(real.(p),imag.(p),line=false,marker=1;opts...)
+function draw_point(pts::Array{Complex{T},1};opts...) where T
+    for p in pts
+        draw_point(p;opts...)
+    end
 end
+
+"""
+`draw_vector` is used to draw vectors (line segments with an arrow at one end).
+The variations are:
++ `draw_vector(x,y)` draws a vector from the origin to `(x,y)`.
++ `draw_vector(x,y,basex,basey)` draws a vector from `(basex,basey)` to
+`(basex+x,basey+y)`.
++ `draw_vector(z)` draws a vector from the origin to the complex value `z`.
++ `draw_vector(z,basez)` draws a vector from the complex location `basez` to
+`z+basez`.
+"""
+draw_vector(x::Real,y::Real; opts...) = draw_segment(0,0,x,y;arrow=:arrow, opts...)
+
+draw_vector(z::Complex;opts...) = draw_segment(0+0im, z; arrow=:arrow, opts...)
+
+draw_vector(x::Real,y::Real,basex::Real,basey::Real; opts...) =
+    draw_segment(basex,basey,basex+x,basey+y; arrow=:arrow, opts...)
+
+draw_vector(z::Complex, basez::Complex; opts...) =
+    draw_segment(basez, basez+z; arrow=:arrow, opts...)
+
 
 """
 `finish()` is used to clean up a drawing after various calls to `draw`.
