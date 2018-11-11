@@ -123,7 +123,7 @@ function open_spline(y::Array{T,1})::Spline where T<:Number
         M[i+1,i] = 1
     end
 
-    rhs = zeros(Number,n)
+    rhs = zeros(T,n)
     rhs[1] = 3*(y[2]-y[1])
     for k=2:n-1
         rhs[k] = 3*(y[k+1]-y[k-1])
