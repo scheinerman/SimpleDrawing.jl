@@ -2,7 +2,7 @@ module SimpleDrawing
 using Plots, LinearAlgebra
 
 export newdraw, draw_circle, draw_arc, draw_segment, draw_point, draw_vector
-export find_center, non_colinear_check
+export draw_rectangle, find_center, non_colinear_check
 export finish, draw
 
 """
@@ -116,6 +116,22 @@ function draw_point(pts::Array{Complex{T},1};opts...) where T
         draw_point(p;opts...)
     end
 end
+
+"""
+`draw_rectangle(x,y,xx,yy)` draws a rectangle with opposite corners
+`(x,y)` and `(xx,yy)`.  May also be called with complex arguments
+`draw_rectangle(w,z)`.
+"""
+function draw_rectangle(x::Real,y::Real,xx::Real,yy::Real; opts...)
+    xlist = [x,xx,xx,x,x]
+    ylist = [y,y,yy,yy,y]
+    plot!(xlist,ylist;opts...)
+end
+
+function draw_rectangle(w::Complex, z::Complex; opts...)
+    draw_rectangle(real(w),imag(w),real(z),imag(z);opts...)
+end
+
 
 """
 `draw_vector` is used to draw vectors (line segments with an arrow at one end).

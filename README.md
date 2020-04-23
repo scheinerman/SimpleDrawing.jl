@@ -47,6 +47,9 @@ at `(x,y)` with radius `r`. Also `draw_circle(z::Complex,r::Real;opts...)`.
 + `draw_curve(pts;opts...)` draws a curve through the points specified by `pts`, a
 one-dimensional array of complex numbers. By default, this gives a closed curve.
 To draw an open curve, use `draw(pts,false;opts...)`
++ `draw_rectangle(x::Real,y::Real,xx::Real,yy::Real;opts...)` draws a rectangle
+with corners `(x,y)` and `(xx,yy)`.
+Also available as `draw_rectangle(w::Complex,z::Complex)`.
 
 
 
