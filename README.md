@@ -63,6 +63,24 @@ the three points (represented as complex numbers). Returns
   complex numbers) are noncollinear; returns `true` if so and `false` if they
   are collinear (including if two are the same).
 
+## Spying a matrix
+
+`my_spy(A)` creates a black-and-white image representing the matrix `A`
+in which nonzero entries are black squares and zeros are white squares.
+
+For example, if the matrix is this:
+```
+julia> A
+5×8 Array{Int64,2}:
+ 1  1  0  0  1  1  1  0
+ 1  0  1  0  0  1  1  1
+ 0  1  0  1  1  0  1  0
+ 0  1  0  1  0  1  1  1
+ 1  1  1  1  0  0  1  0
+ ```
+ then `my_spy(A)` creates this image:
+ 
+ ![](/my_spy.png)
 
 ## Example
 
