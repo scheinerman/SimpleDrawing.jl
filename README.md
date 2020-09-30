@@ -1,10 +1,9 @@
 # SimpleDrawing
 
 
-[![Build Status](https://travis-ci.org/scheinerman/SimpleDrawing.jl.svg?branch=master)](https://travis-ci.org/scheinerman/SimpleDrawing.jl)
+[![Build Status](https://travis-ci.com/scheinerman/SimpleDrawing.jl.svg?branch=master)](https://travis-ci.com/scheinerman/SimpleDrawing.jl)
 
 
-[![codecov.io](http://codecov.io/github/scheinerman/SimpleDrawing.jl/coverage.svg?branch=master)](http://codecov.io/github/scheinerman/SimpleDrawing.jl?branch=master)
 
 
 
