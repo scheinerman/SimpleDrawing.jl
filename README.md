@@ -14,7 +14,7 @@ by other modules including `DrawSimpleGraphs`, `HyperbolicPlane`, and
 
 ## Functions
 
-#### General
+### General
 
 + `newdraw()` presents a blank canvas on which to draw (and erases anything
 that's already in that window).
@@ -24,7 +24,7 @@ we hide the axes, grid, and legend.
 + `draw()` does nothing. It is a placeholder function for other modules to
 override.
 
-#### Drawing Specific Shapes
+### Drawing Specific Shapes
 + `draw_point(x::Real,y::Real;opts...)` plots a point (small disk). This
 may also be invoked as `draw_point(z::Complex)`. If `plist` is a list of
 complex numbers, may also use `draw_point(plist)` to draw all those points.
@@ -51,8 +51,39 @@ with corners `(x,y)` and `(xx,yy)`.
 Also available as `draw_rectangle(w::Complex,z::Complex)`.
 
 
+### Drawing Coordinate Axes
 
-#### Supporting Functions
+The functions `draw_xaxis` and `draw_yaxis` can be used to create axes for figure.
+This assumes that axes emanate from the origin.
++ `draw_xaxis(x)` draws an axis from the origin to `(x,0)`.
++ `draw_xaxis()` draws a pair of x-axes extended 10% further than the values returned by `xlims()`.
+
+The function `draw_yaxis()` has analogous behavior.
+
+The functions `draw_xtick` and `draw_ytick` can be used to make small 
+tick marks on the axis.
++ `draw_xtick(x,len)` draws a small tick mark with total length `len`
+at the point `x` on the x-axis.
++ `draw_xtick(xlist,len)` calls `draw_xtick` for the values in `xlist`.
+
+If `len` is omitted, a default value is used. The function `draw_ytick` 
+works analogously. 
+
+#### Example
+```julia
+julia> using Plots, SimpleDrawing
+julia> plot(sin,-5,5,linewidth=2,color=:black)
+julia> draw_xaxis()
+julia> draw_yaxis()
+julia> draw_xtick(-5:5)
+julia> finish()
+```
+
+![](axes-example.png)
+
+
+
+### Supporting Functions
 
 + `find_center(a,b,c)` returns the center of the circle that passes through
 the three points (represented as complex numbers). Returns
@@ -79,7 +110,7 @@ julia> A
  ```
  then `my_spy(A)` creates this image:
  
- ![](/my_spy.png)
+ ![](my_spy.png)
 
 ## Example
 
