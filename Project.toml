@@ -1,6 +1,6 @@
 name = "SimpleDrawing"
 uuid = "d78a06e8-ae74-583c-9a07-0d6572347000"
-version = "0.2.4"
+version = "0.2.5"
 
 
 [deps]

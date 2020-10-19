@@ -8,13 +8,18 @@ If `x` is omitted, draws a pair of arrows from the origin
 to values 10% larger than those returned by `xlims()`.
 """
 function draw_xaxis(x::Real; opts...)
-    draw_vector(x,0; color=:black, linewidth=0.5, opts...)
+    draw_vector(x,0; color=:black, linewidth=0.5, legend=false, opts...)
 end
+
+function draw_xaxis(x1::Real, x2::Real; opts...)
+    draw_xaxis(x1;opts...)
+    draw_xaxis(x2;opts...)
+end 
 
 function draw_xaxis(;opts...)
     x1,x2 = xlims()
-    draw_xaxis(1.1*x1;opts...)
-    draw_xaxis(1.1*x2;opts...)
+    draw_xaxis(x1;opts...)
+    draw_xaxis(x2;opts...)
 end
 
 """
@@ -27,10 +32,16 @@ function draw_yaxis(y::Real; opts...)
     draw_vector(0,y; color=:black, linewidth=0.5, opts...)
 end
 
+function draw_yaxis(y1::Real,y2::Real; opts...)
+    draw_yaxis(y1;opts...)
+    draw_yaxis(y2;opts...)
+end
+
+
 function draw_yaxis(;opts...)
     y1,y2 = ylims()
-    draw_yaxis(1.1*y1;opts...)
-    draw_yaxis(1.1*y2;opts...)
+    draw_yaxis(y1;opts...)
+    draw_yaxis(y2;opts...)
 end
 
 _DEFAULT_TICK_LEN = 0.2
@@ -50,6 +61,7 @@ function draw_xtick(xlist, len=_DEFAULT_TICK_LEN; opts...)
     for x in xlist
         draw_xtick(x,len,opts...)
     end 
+    plot!()
 end
 
 
@@ -68,4 +80,5 @@ function draw_ytick(ylist, len=_DEFAULT_TICK_LEN; opts...)
     for y in ylist
         draw_ytick(y,len,opts...)
     end 
+    plot!()
 end 
