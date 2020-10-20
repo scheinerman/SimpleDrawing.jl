@@ -113,6 +113,7 @@ function draw_point(pts::Array{Complex{T},1}; opts...) where {T}
     for p in pts
         draw_point(p; opts...)
     end
+    plot!()
 end
 
 """
