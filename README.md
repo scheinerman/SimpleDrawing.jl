@@ -54,8 +54,9 @@ Also available as `draw_rectangle(w::Complex,z::Complex)`.
 ### Drawing Coordinate Axes
 
 The functions `draw_xaxis` and `draw_yaxis` can be used to create axes for figure.
-This assumes that axes emanate from the origin.
+We assume that the axes emanate from the origin.
 + `draw_xaxis(x)` draws an axis from the origin to `(x,0)`.
++ `draw_xaxis(x1,x2)` is equivalent to calling `draw_xaxis(x1)` and then `draw_xaxis(x2)`.
 + `draw_xaxis()` draws a pair of x-axes extended 10% further than the values returned by `xlims()`.
 
 The function `draw_yaxis()` has analogous behavior.
