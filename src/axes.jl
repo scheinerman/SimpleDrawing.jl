@@ -1,4 +1,4 @@
-export draw_xaxis, draw_yaxis, draw_xtick, draw_ytick
+export draw_xaxis, draw_yaxis, draw_axes, draw_xtick, draw_ytick
 
 
 """
@@ -41,15 +41,23 @@ function draw_yaxis(y1::Real,y2::Real; opts...)
     draw_yaxis(y2;opts...)
 end
 
-
 function draw_yaxis(;opts...)
     y1,y2 = ylims()
     draw_yaxis(y1;opts...)
     draw_yaxis(y2;opts...)
 end
 
-_DEFAULT_TICK_LEN = 0.2
+"""
+`draw_axes()` invokes `draw_xaxis()` and `draw_yaxis()`.
+"""
+function draw_axes(;opts...)
+    draw_xaxis(;opts...)
+    draw_yaxis(;opts...)
+end
 
+
+
+const _DEFAULT_TICK_LEN = 0.2
 
 """
 `draw_xtick(x::Real,len)` draws a tick mark on the x-axis with total length `len`.

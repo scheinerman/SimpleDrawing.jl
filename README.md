@@ -59,10 +59,13 @@ We assume that the axes emanate from the origin.
 + `draw_xaxis(x1,x2)` is equivalent to calling `draw_xaxis(x1)` and then `draw_xaxis(x2)`.
 + `draw_xaxis()` draws a pair of x-axes extended 10% further than the values returned by `xlims()`.
 
+
 The function `draw_yaxis()` has analogous behavior.
 
+A call to `draw_axes()` invokes `draw_xaxis()` and `draw_yaxis()`.
+
 The functions `draw_xtick` and `draw_ytick` can be used to make small 
-tick marks on the axis.
+tick marks on the axes.
 + `draw_xtick(x,len)` draws a small tick mark with total length `len`
 at the point `x` on the x-axis.
 + `draw_xtick(xlist,len)` calls `draw_xtick` for the values in `xlist`.
