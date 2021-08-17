@@ -1,10 +1,6 @@
 # SimpleDrawing
 
 
-[![Build Status](https://travis-ci.com/scheinerman/SimpleDrawing.jl.svg?branch=master)](https://travis-ci.com/scheinerman/SimpleDrawing.jl)
-
-
-
 
 
 This package provides some convenient drawing tools derived from the
