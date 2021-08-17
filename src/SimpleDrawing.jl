@@ -198,6 +198,19 @@ function non_colinear_check(a::Complex, b::Complex, c::Complex)::Bool
     return imag(z) != 0
 end
 
+"""
+    resize_gr_window(wide=800, tall=600)
+
+Change the size of the `gr` drawing window. This is particularly 
+useful in VS code.
+"""
+function resize_gr_window(wide::Int=800, tall::Int=600)
+    gr(size=(wide,tall))
+end
+export resize_gr_window
+
+
+
 include("cubic.jl")
 include("curve.jl")
 include("my_spy.jl")

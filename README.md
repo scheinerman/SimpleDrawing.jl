@@ -23,6 +23,7 @@ aspect ratio equal to 1, and that
 we hide the axes, grid, and legend.
 + `draw()` does nothing. It is a placeholder function for other modules to
 override.
++ `resize_gr_window(wide=800,tall=600)` changes the size of the GR window.
 
 ### Drawing Specific Shapes
 + `draw_point(x::Real,y::Real;opts...)` plots a point (small disk). This
