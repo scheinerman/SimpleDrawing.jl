@@ -40,6 +40,8 @@ angles `t1` and `t2`.
 the arc with end points `a` and `c` passing through `b`.
 + `draw_circle(x::Real,y::Real,r::Real;opts...)` draws a circle centered
 at `(x,y)` with radius `r`. Also `draw_circle(z::Complex,r::Real;opts...)`.
++ `draw_disc` works just like `draw_circle`, but the interior is filled. Try, for example, 
+`draw_disc(0,1,3; color=:yellow, linecolor=:red)`.
 + `draw_curve(pts;opts...)` draws a curve through the points specified by `pts`, a
 one-dimensional array of complex numbers. By default, this gives a closed curve.
 To draw an open curve, use `draw(pts,false;opts...)`

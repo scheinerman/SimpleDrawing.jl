@@ -10,18 +10,18 @@ If no x-value is given, draw a pair of arrows from the origin
 to values 10% larger than those returned by `xlims()`.
 """
 function draw_xaxis(x::Real; opts...)
-    draw_vector(x,0; color=:black, linewidth=0.5, legend=false, opts...)
+    draw_vector(x, 0; color = :black, linewidth = 0.5, legend = false, opts...)
 end
 
 function draw_xaxis(x1::Real, x2::Real; opts...)
-    draw_xaxis(x1;opts...)
-    draw_xaxis(x2;opts...)
-end 
+    draw_xaxis(x1; opts...)
+    draw_xaxis(x2; opts...)
+end
 
-function draw_xaxis(;opts...)
-    x1,x2 = xlims()
-    draw_xaxis(x1;opts...)
-    draw_xaxis(x2;opts...)
+function draw_xaxis(; opts...)
+    x1, x2 = xlims()
+    draw_xaxis(x1; opts...)
+    draw_xaxis(x2; opts...)
 end
 
 """
@@ -33,26 +33,26 @@ If no y-value is given, draw a pair of arrows from the origin
 to values 10% larger than those returned by `ylims()`.
 """
 function draw_yaxis(y::Real; opts...)
-    draw_vector(0,y; color=:black, linewidth=0.5, opts...)
+    draw_vector(0, y; color = :black, linewidth = 0.5, opts...)
 end
 
-function draw_yaxis(y1::Real,y2::Real; opts...)
-    draw_yaxis(y1;opts...)
-    draw_yaxis(y2;opts...)
+function draw_yaxis(y1::Real, y2::Real; opts...)
+    draw_yaxis(y1; opts...)
+    draw_yaxis(y2; opts...)
 end
 
-function draw_yaxis(;opts...)
-    y1,y2 = ylims()
-    draw_yaxis(y1;opts...)
-    draw_yaxis(y2;opts...)
+function draw_yaxis(; opts...)
+    y1, y2 = ylims()
+    draw_yaxis(y1; opts...)
+    draw_yaxis(y2; opts...)
 end
 
 """
 `draw_axes()` invokes `draw_xaxis()` and `draw_yaxis()`.
 """
-function draw_axes(;opts...)
-    draw_xaxis(;opts...)
-    draw_yaxis(;opts...)
+function draw_axes(; opts...)
+    draw_xaxis(; opts...)
+    draw_yaxis(; opts...)
 end
 
 
@@ -65,14 +65,14 @@ If `len` is omitted, use `SimpleDrawing._DEFAULT_TICK_LEN`.
 
 `draw_xtick(xlist,len)` calls `draw_xtick` for each value in `xlist`.
 """
-function draw_xtick(x::Real, len=_DEFAULT_TICK_LEN; opts...)
-    draw_segment(x,-len/2,x,len/2,color=:black, linewidth=0.5, opts...)
+function draw_xtick(x::Real, len = _DEFAULT_TICK_LEN; opts...)
+    draw_segment(x, -len / 2, x, len / 2, color = :black, linewidth = 0.5, opts...)
 end
 
-function draw_xtick(xlist, len=_DEFAULT_TICK_LEN; opts...)
+function draw_xtick(xlist, len = _DEFAULT_TICK_LEN; opts...)
     for x in xlist
-        draw_xtick(x,len,opts...)
-    end 
+        draw_xtick(x, len, opts...)
+    end
     plot!()
 end
 
@@ -84,13 +84,13 @@ If `len` is omitted, use `SimpleDrawing._DEFAULT_TICK_LEN`.
 
 `draw_xtick(ylist,len)` calls `draw_ytick` for each value in `xyist`.
 """
-function draw_ytick(y::Real, len=_DEFAULT_TICK_LEN; opts...)
-    draw_segment(-len/2,y,len/2,y, color=:black, linewidth=0.5, opts...)
+function draw_ytick(y::Real, len = _DEFAULT_TICK_LEN; opts...)
+    draw_segment(-len / 2, y, len / 2, y, color = :black, linewidth = 0.5, opts...)
 end
 
-function draw_ytick(ylist, len=_DEFAULT_TICK_LEN; opts...)
+function draw_ytick(ylist, len = _DEFAULT_TICK_LEN; opts...)
     for y in ylist
-        draw_ytick(y,len,opts...)
-    end 
+        draw_ytick(y, len, opts...)
+    end
     plot!()
-end 
+end

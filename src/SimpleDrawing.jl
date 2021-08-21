@@ -10,14 +10,18 @@ export finish, draw
 no axis, grid, or legend, and sets the aspect ratio to 1.
 """
 function newdraw()
-    plot(aspectratio = 1, legend = false, axis = false, grid = false, ticks=false)
+    plot(aspectratio = 1, legend = false, axis = false, grid = false, ticks = false)
 end
 
 function draw() end
 
 """
-`draw_circle(x,y,r)` (or `draw_circle(z,r)`) draws a circle centered
-at `(x,y)` (at `z`) with radius `r`.
+    draw_circle(x,y,r) 
+    
+Draw a circle centered
+at `(x,y)` with radius `r`.
+
+Also: `draw_circle(z,r)` where `z` is complex.
 """
 function draw_circle(x::Real, y::Real, r::Real; opts...)
     f(t) = r * cos(t) + x
@@ -28,7 +32,9 @@ end
 draw_circle(z::Complex, r::Real; opts...) = draw_circle(real(z), imag(z), r; opts...)
 
 """
-`draw_circle(a,b,c)` draws a circle through the points given by
+    draw_circle(a,b,c)
+
+Draw a circle through the points given by
 the three complex arguments.
 """
 function draw_circle(a::Complex, b::Complex, c::Complex; opts...)
@@ -37,6 +43,36 @@ function draw_circle(a::Complex, b::Complex, c::Complex; opts...)
     x, y = reim(z)
     draw_circle(x, y, r; opts...)
 end
+
+
+export draw_disc
+
+"""
+    draw_disc(x,y,r)
+
+Draw a disc centered at `(x,y)` and with radius `r`. May also be invoked as:
+* `draw_disc(z,r)` where `z` is complex.
+* `draw_disc(a,b,c)` where `a,b,c` are complex which gives a disc passing through `a`, `b`, and `c`.
+
+For example: `draw_disc(0,1,3; color=:yellow, linecolor=:red)`
+"""
+function draw_disc(x::Real, y::Real, r::Real; opts...)
+    draw_circle(x, y, r, seriestype = [:shape], fillalpha = 1; opts...)
+end
+
+function draw_disc(z::Complex, r::Real; opts...)
+    draw_disc(real(z), imag(z), r; opts...)
+end
+
+function draw_disc(a::Complex, b::Complex, c::Complex; opts...)
+    z = find_center(a, b, c)
+    r = abs(a - z)
+    x, y = reim(z)
+    draw_disc(x, y, r; opts...)
+end
+
+
+
 
 
 """
@@ -204,8 +240,8 @@ end
 Change the size of the `gr` drawing window. This is particularly 
 useful in VS code.
 """
-function resize_gr_window(wide::Int=800, tall::Int=600)
-    gr(size=(wide,tall))
+function resize_gr_window(wide::Int = 800, tall::Int = 600)
+    gr(size = (wide, tall))
 end
 export resize_gr_window
 
