@@ -168,17 +168,19 @@ function draw_rectangle(w::Complex, z::Complex; opts...)
 end
 
 """
-    draw_polygon(pts; opts)
+    draw_polygon(pts; opts...)
+    draw_polygon(xvals, yvals; opts...)
 Draw a polygon whose vertices are specified in the list `pts`
 containing complex numbers. 
 """
 function draw_polygon(pts::Vector{Complex{T}}; opts...) where {T}
-    n = length(pts)
+    draw_polygon(real(pts), imag(pts); opts...)
+end
 
-    x = [real(pts); real(pts[1])]
-    y = [imag(pts); imag(pts[1])]
-    plot!(x, y; opts...)
-
+function draw_polygon(xs::Vector{S}, ys::Vector{T}; opts...) where {S<:Real, T<:Real}
+    xx = [xs; xs[1]]
+    yy = [ys; ys[1]]
+    plot!(xx, yy; opts...)
 end
 
 

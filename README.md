@@ -48,6 +48,7 @@ To draw an open curve, use `draw(pts,false;opts...)`
 + `draw_rectangle(x::Real,y::Real,xx::Real,yy::Real;opts...)` draws a rectangle
 with corners `(x,y)` and `(xx,yy)`.
 Also available as `draw_rectangle(w::Complex,z::Complex)`.
++ `draw_polygon(xs, ys; opts...)` draws a closed polygon based on the lists of real coordinates `xs` and `ys`. Also available as `draw_polygon(zs; opts)` where `zs` is a list of complex numbers. 
 
 
 ### Drawing Coordinate Axes
