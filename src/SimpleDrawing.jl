@@ -1,7 +1,7 @@
 module SimpleDrawing
 using Plots, LinearAlgebra
 
-export newdraw, draw_circle, draw_arc, draw_segment, draw_point, draw_vector
+export newdraw, draw_circle, draw_arc, draw_segment, draw_point, draw_vector, draw_polygon
 export draw_rectangle, find_center, non_colinear_check
 export finish, draw
 
@@ -166,6 +166,22 @@ end
 function draw_rectangle(w::Complex, z::Complex; opts...)
     draw_rectangle(real(w), imag(w), real(z), imag(z); opts...)
 end
+
+"""
+    draw_polygon(pts; opts)
+Draw a polygon whose vertices are specified in the list `pts`
+containing complex numbers. 
+"""
+function draw_polygon(pts::Vector{Complex{T}}; opts...) where {T}
+    n = length(pts)
+
+    x = [real(pts); real(pts[1])]
+    y = [imag(pts); imag(pts[1])]
+    plot!(x, y; opts...)
+
+end
+
+
 
 
 """
