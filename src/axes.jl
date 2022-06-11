@@ -94,3 +94,16 @@ function draw_ytick(ylist, len = _DEFAULT_TICK_LEN; opts...)
     end
     plot!()
 end
+
+"""
+    corners()
+Return the corners of the current drawing area as a pair of complex numbers
+representing the lower left and upper right corners. 
+"""
+function corners()
+    x1, x2 = xlims()
+    y1, y2 = ylims()
+    return (x1 + im * y1, x2 + im * y2)
+end
+
+export corners

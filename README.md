@@ -73,6 +73,10 @@ at the point `x` on the x-axis.
 If `len` is omitted, a default value is used. The function `draw_ytick` 
 works analogously. 
 
+The size of the drawing area can be determined with the function `corners` 
+which returns the lower left and upper right corners of the drawing area
+as a pair of complex numbers. (See `xlims` and `ylims` in the `Plots` module.)
+
 #### Example
 ```julia
 julia> using Plots, SimpleDrawing
