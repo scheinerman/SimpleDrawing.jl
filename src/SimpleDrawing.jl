@@ -177,7 +177,7 @@ function draw_polygon(pts::Vector{Complex{T}}; opts...) where {T}
     draw_polygon(real(pts), imag(pts); opts...)
 end
 
-function draw_polygon(xs::Vector{S}, ys::Vector{T}; opts...) where {S<:Real, T<:Real}
+function draw_polygon(xs::Vector{S}, ys::Vector{T}; opts...) where {S<:Real,T<:Real}
     xx = [xs; xs[1]]
     yy = [ys; ys[1]]
     plot!(xx, yy; opts...)
