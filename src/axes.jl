@@ -2,6 +2,8 @@ export draw_xaxis, draw_yaxis, draw_axes, draw_xtick, draw_ytick
 
 
 """
+    draw_xaxis(x::Real; opts...)
+
 `draw_xaxis(x)` draws a thin arrow from the origin to `(x,0)`.
 
 `draw_xaxis(x1,x2)` is equivalent to `draw_xaxis(x1); draw_xaxis(x2)`.
@@ -25,6 +27,8 @@ function draw_xaxis(; opts...)
 end
 
 """
+    draw_yaxis(y::Real; opts...)
+
 `draw_yaxis(y)` draws a thin arrow from the origin to `(0,y)`.
 
 `draw_yaxis(y1,y2)` is equivalent to `draw_yaxis(x1); draw_yaxis(x2)`.
@@ -48,6 +52,8 @@ function draw_yaxis(; opts...)
 end
 
 """
+    draw_axes(; opts...)
+
 `draw_axes()` invokes `draw_xaxis()` and `draw_yaxis()`.
 """
 function draw_axes(; opts...)
@@ -60,6 +66,8 @@ end
 const _DEFAULT_TICK_LEN = 0.2
 
 """
+    draw_xtick(x::Real, len = _DEFAULT_TICK_LEN; opts...)
+
 `draw_xtick(x::Real,len)` draws a tick mark on the x-axis with total length `len`.
 If `len` is omitted, use `SimpleDrawing._DEFAULT_TICK_LEN`.
 
@@ -79,6 +87,8 @@ end
 
 
 """
+    draw_ytick(y::Real, len = _DEFAULT_TICK_LEN; opts...)
+
 `draw_ytick(y::Real,len)` draws a tick mark on the y-axis with total length `len`.
 If `len` is omitted, use `SimpleDrawing._DEFAULT_TICK_LEN`.
 

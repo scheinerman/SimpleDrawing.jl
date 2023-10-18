@@ -6,6 +6,8 @@ export draw_rectangle, find_center, non_colinear_check
 export finish, draw
 
 """
+    newdraw()
+
 `newdraw()` clears the screen and sets up a blank drawing canvas with
 no axis, grid, or legend, and sets the aspect ratio to 1.
 """
@@ -76,6 +78,8 @@ end
 
 
 """
+    draw_arc(x::Real, y::Real, r::Real, t1::Real, t2::Real; opts...)
+
 `draw_arc(x,y,r,t1,t2)` draws the shorter arc centered at `(x,y)`
 with radius `r` between angles `t1` and `t2`.
 """
@@ -89,6 +93,8 @@ end
 
 
 """
+    draw_arc(a::Complex, b::Complex, c::Complex; opts...)
+
 `draw_arc(a,b,c)` where the arguments are `Complex`: Draw the
 arc from `a` through `b` to `c`.
 """
@@ -118,6 +124,8 @@ end
 
 
 """
+    draw_segment(a::Real, b::Real, c::Real, d::Real; opts...)
+
 `draw_segment(x,y,xx,yy)` draws a line segment from `(x,y)` to
 `(xx,yy)`. Also `draw_segment(z,zz)` for `Complex` arguments.
 """
@@ -133,6 +141,8 @@ end
 
 
 """
+    draw_point(x::Real, y::Real; opts...)
+
 `draw_point(x,y)` [or `draw_point(z)`] draws a point at coordinates `(x,y)`
 [or complex location `z`].
 
@@ -153,6 +163,8 @@ function draw_point(pts::Array{Complex{T},1}; opts...) where {T}
 end
 
 """
+    draw_rectangle(x::Real, y::Real, xx::Real, yy::Real; opts...)
+
 `draw_rectangle(x,y,xx,yy)` draws a rectangle with opposite corners
 `(x,y)` and `(xx,yy)`.  May also be called with complex arguments
 `draw_rectangle(w,z)`.
@@ -168,7 +180,7 @@ function draw_rectangle(w::Complex, z::Complex; opts...)
 end
 
 """
-    draw_polygon(pts; opts...)
+    draw_polygon(pts::Vector{Complex{T}}; opts...) where {T}
     draw_polygon(xvals, yvals; opts...)
 Draw a polygon whose vertices are specified in the list `pts`
 containing complex numbers. 
@@ -208,6 +220,8 @@ draw_vector(z::Complex, basez::Complex; opts...) =
 
 
 """
+    finish()
+
 `finish()` is used to clean up a drawing after various calls to `draw`.
 It removes the axes and the grid lines, and sets the aspect ratio to one.
 """
@@ -220,6 +234,8 @@ end
 export find_center, non_colinear_check
 
 """
+    find_center(a::Complex, b::Complex, c::Complex)::Complex
+
 `find_center(a,b,c)`: Given three points in the complex plane,
 find the point `z` that is equidistant from all three. If the three
 points are collinear then return `Inf + Inf*im`.
@@ -241,6 +257,8 @@ function find_center(a::Complex, b::Complex, c::Complex)::Complex
 end
 
 """
+    non_colinear_check(a::Complex, b::Complex, c::Complex)::Bool
+
 `non_colinear_check(a,b,c)`: test if the complex numbers are distinct
 and noncollinear.
 """

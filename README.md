@@ -1,8 +1,5 @@
 # SimpleDrawing
 
-
-
-
 This package provides some convenient drawing tools derived from the
 `Plots` module. It also defines the `draw()` function that can be extended
 by other modules including `DrawSimpleGraphs`, `HyperbolicPlane`, and
@@ -48,7 +45,9 @@ To draw an open curve, use `draw(pts,false;opts...)`
 + `draw_rectangle(x::Real,y::Real,xx::Real,yy::Real;opts...)` draws a rectangle
 with corners `(x,y)` and `(xx,yy)`.
 Also available as `draw_rectangle(w::Complex,z::Complex)`.
-+ `draw_polygon(xs, ys; opts...)` draws a closed polygon based on the lists of real coordinates `xs` and `ys`. Also available as `draw_polygon(zs; opts)` where `zs` is a list of complex numbers. 
++ `draw_polygon(xs, ys; opts...)` draws a closed polygon based on the lists of 
+real coordinates `xs` and `ys`. Also available as `draw_polygon(zs; opts)` where `zs` 
+is a list of complex numbers. 
 
 
 ### Drawing Coordinate Axes
@@ -78,7 +77,7 @@ which returns the lower left and upper right corners of the drawing area
 as a pair of complex numbers. (See `xlims` and `ylims` in the `Plots` module.)
 
 #### Example
-```julia
+```
 julia> using Plots, SimpleDrawing
 julia> plot(sin,-5,5,linewidth=2,color=:black)
 julia> draw_xaxis()

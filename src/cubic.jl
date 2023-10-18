@@ -37,6 +37,8 @@ function Base.adjoint(S::Spline)
 end
 
 """
+    Spline(y::Array{T,1}, kind::Symbol = :open)::Spline where {T<:Number}
+
 `Spline(vals,kind)` returns a cubic spline based on the values in `vals`.
 The resulting spline `S` will have the property that `S(1)==y[1]`,
 `S(2)==y[2]`, and so on up to `S(n)==y[n]` where `n` is the length of `y`.
@@ -71,10 +73,12 @@ end
 getindex(S::Spline, idx::Int) = S.patches[idx]
 
 """
+    funk(S)::Function
+
 `funk(S)` converts the Spline `S` into a callable function
 (e.g., that can be passed to `plot`).
 """
-function funk(S)::Function
+function funk(S::Spline)::Function
     return x -> S(x)
 end
 
