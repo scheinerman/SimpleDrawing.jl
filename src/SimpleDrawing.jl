@@ -16,6 +16,7 @@ function newdraw()
 end
 
 function draw() end
+function draw(::Nothing) end
 
 """
     draw_circle(x,y,r) 
