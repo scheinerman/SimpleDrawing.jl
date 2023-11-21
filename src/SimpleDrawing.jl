@@ -288,4 +288,5 @@ include("cubic.jl")
 include("curve.jl")
 include("my_spy.jl")
 include("axes.jl")
+include("expand_canvas.jl")
 end
