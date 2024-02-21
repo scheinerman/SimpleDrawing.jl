@@ -1,6 +1,6 @@
 name = "SimpleDrawing"
 uuid = "d78a06e8-ae74-583c-9a07-0d6572347000"
-version = "0.2.14"
+version = "0.2.15"
 
 [deps]
 LinearAlgebra = "37e2e46d-f89d-539d-b4ee-838fcccc9c8e"

@@ -3,7 +3,7 @@ using Plots, LinearAlgebra
 
 export newdraw, draw_circle, draw_arc, draw_segment, draw_point, draw_vector, draw_polygon
 export draw_rectangle, find_center, non_colinear_check
-export finish, draw
+export finish, draw, draw!
 
 """
     newdraw()
@@ -15,8 +15,11 @@ function newdraw()
     plot(aspectratio = 1, legend = false, axis = false, grid = false, ticks = false)
 end
 
+# For use by packages that rely on this one.
 function draw() end
 function draw(::Nothing) end
+function draw!() end
+function draw!(::Nothing) end
 
 """
     draw_circle(x,y,r) 
