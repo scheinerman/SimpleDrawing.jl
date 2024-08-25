@@ -7,46 +7,23 @@ by other modules such as  `DrawSimpleGraphs` and `HyperbolicPlane`.
 
 ## General Functions
 
-+ `newdraw()` presents a blank canvas on which to draw (and erases anything
-that's already in that window).
-+ `finish()` ensures that the figure appears on the screen with
-aspect ratio equal to 1, and that
-we hide the axes, grid, and legend.
-+ `draw()` does nothing. It is a placeholder function for other modules to
-override.
++ `newdraw()` presents a blank canvas on which to draw (and erases anything that's already in that window).
++ `finish()` ensures that the figure appears on the screen with aspect ratio equal to 1, and that we hide the axes, grid, and legend.
++ `draw()` does nothing. It is a placeholder function for other modules to override.
 + `expand_canvas(factor=0.05)` expands the drawing area.
 + `resize_gr_window(wide=800,tall=600)` changes the size of the GR window.
 
 ## Drawing Specific Shapes
-+ `draw_point(x::Real,y::Real;opts...)` plots a point (small disk). This
-may also be invoked as `draw_point(z::Complex)`. If `plist` is a list of
-complex numbers, may also use `draw_point(plist)` to draw all those points.
-+ `draw_segment(x::Real,y::Real,xx::Real,yy::Real;opts...)` draws a
-line segment from `(x,y)` to `(xx,yy)`. May also be invoked as
-`draw_segment(z::Complex,zz::Complex)`.
-+ `draw_vector(x::Real,y::Real)` draws a vector from `(0,0)` to `(x,y)`. A
-different base point may be specified `draw_vector(x,y,basex,basey)` in which
-case the vector starts at `(basex,basey)` and extends to `(basex+x,basey+y)`.
-This may also be used with complex arguments: `draw_vector(z)` and
-`draw_vector(z, basez)`.
-+ `draw_arc(x::Real,y::Real,r::Real,t1::Real,t2::Real;opts...)` draws an
-arc of a circle centered at `(x,y)`, with radius `r`, and arcing between
-angles `t1` and `t2`.
-+ `draw_arc(a::Complex,b::Complex,c::Complex;opts...)` draws
-the arc with end points `a` and `c` passing through `b`.
-+ `draw_circle(x::Real,y::Real,r::Real;opts...)` draws a circle centered
-at `(x,y)` with radius `r`. Also `draw_circle(z::Complex,r::Real;opts...)`.
-+ `draw_disc` works just like `draw_circle`, but the interior is filled. Try, for example, 
-`draw_disc(0,1,3; color=:yellow, linecolor=:red)`.
-+ `draw_curve(pts;opts...)` draws a curve through the points specified by `pts`, a
-one-dimensional array of complex numbers. By default, this gives a closed curve.
-To draw an open curve, use `draw_curve(pts,false;opts...)`
-+ `draw_rectangle(x::Real,y::Real,xx::Real,yy::Real;opts...)` draws a rectangle
-with corners `(x,y)` and `(xx,yy)`.
-Also available as `draw_rectangle(w::Complex,z::Complex)`.
-+ `draw_polygon(xs, ys; opts...)` draws a closed polygon based on the lists of 
-real coordinates `xs` and `ys`. Also available as `draw_polygon(zs; opts)` where `zs` 
-is a list of complex numbers. 
++ `draw_point(x::Real,y::Real;opts...)` plots a point (small disk). This may also be invoked as `draw_point(z::Complex)`. If `plist` is a list of complex numbers, may also use `draw_point(plist)` to draw all those points.
++ `draw_segment(x::Real,y::Real,xx::Real,yy::Real;opts...)` draws a line segment from `(x,y)` to `(xx,yy)`. May also be invoked as `draw_segment(z::Complex,zz::Complex)`.
++ `draw_vector(x::Real,y::Real)` draws a vector from `(0,0)` to `(x,y)`. A different base point may be specified `draw_vector(x,y,basex,basey)` in which case the vector starts at `(basex,basey)` and extends to `(basex+x,basey+y)`. This may also be used with complex arguments: `draw_vector(z)` and `draw_vector(z, basez)`.
++ `draw_arc(x::Real,y::Real,r::Real,t1::Real,t2::Real;opts...)` draws an arc of a circle centered at `(x,y)`, with radius `r`, and arcing between angles `t1` and `t2`.
++ `draw_arc(a::Complex,b::Complex,c::Complex;opts...)` draws the arc with end points `a` and `c` passing through `b`.
++ `draw_circle(x::Real,y::Real,r::Real;opts...)` draws a circle centered at `(x,y)` with radius `r`. Also `draw_circle(z::Complex,r::Real;opts...)`.
++ `draw_disc` works just like `draw_circle`, but the interior is filled. Try, for example, `draw_disc(0,1,3; color=:yellow, linecolor=:red)`.
++ `draw_curve(pts;opts...)` draws a curve through the points specified by `pts`, a one-dimensional array of complex numbers. By default, this gives a closed curve. To draw an open curve, use `draw_curve(pts,false;opts...)`
++ `draw_rectangle(x::Real,y::Real,xx::Real,yy::Real;opts...)` draws a rectangle with corners `(x,y)` and `(xx,yy)`. Also available as `draw_rectangle(w::Complex,z::Complex)`.
++ `draw_polygon(xs, ys; opts...)` draws a closed polygon based on the lists of  real coordinates `xs` and `ys`. Also available as `draw_polygon(zs; opts)` where `zs`  is a list of complex numbers. 
 
 
 ## Drawing Coordinate Axes
@@ -55,17 +32,13 @@ The functions `draw_xaxis` and `draw_yaxis` can be used to create axes for figur
 We assume that the axes emanate from the origin.
 + `draw_xaxis(x)` draws an axis from the origin to `(x,0)`.
 + `draw_xaxis(x1,x2)` is equivalent to calling `draw_xaxis(x1)` and then `draw_xaxis(x2)`.
-+ `draw_xaxis()` draws a pair of x-axes extended 10% further than the values returned by `xlims()`.
-
-
-The function `draw_yaxis()` has analogous behavior.
-
-A call to `draw_axes()` invokes `draw_xaxis()` and `draw_yaxis()`.
++ `draw_xaxis()` draws a pair of x-axes extended 10% further than the values returned by `xlims()`. The function `draw_yaxis()` has analogous behavior.
++ A call to `draw_axes()` invokes `draw_xaxis()` and `draw_yaxis()`.
 
 The functions `draw_xtick` and `draw_ytick` can be used to make small 
 tick marks on the axes.
-+ `draw_xtick(x,len)` draws a small tick mark with total length `len`
-at the point `x` on the x-axis.
+
++ `draw_xtick(x,len)` draws a small tick mark with total length `len` at the point `x` on the x-axis.
 + `draw_xtick(xlist,len)` calls `draw_xtick` for the values in `xlist`.
 
 If `len` is omitted, a default value is used. The function `draw_ytick` 
@@ -99,7 +72,7 @@ the three points (represented as complex numbers). Returns
   complex numbers) are noncollinear; returns `true` if so and `false` if they
   are collinear (including if two are the same).
 
-## Spying a matrix
+## Spying a Matrix
 
 `my_spy(A)` creates a black-and-white image representing the matrix `A`
 in which nonzero entries are black squares and zeros are white squares.
@@ -113,10 +86,11 @@ julia> A
  0  1  0  1  1  0  1  0
  0  1  0  1  0  1  1  1
  1  1  1  1  0  0  1  0
- ```
+```
+
  then `my_spy(A)` creates this image:
  
- ![](my_spy.png)
+ ![](myspy.png)
 
 ## Example
 

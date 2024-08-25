@@ -290,7 +290,7 @@ export resize_gr_window
 
 include("cubic.jl")
 include("curve.jl")
-include("my_spy.jl")
+include("myspy.jl")
 include("axes.jl")
 include("expand_canvas.jl")
 end
