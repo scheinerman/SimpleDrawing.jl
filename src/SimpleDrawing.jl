@@ -1,5 +1,6 @@
 module SimpleDrawing
-using Plots, LinearAlgebra
+using LinearAlgebra
+using Plots
 
 export newdraw, draw_circle, draw_arc, draw_segment, draw_point, draw_vector, draw_polygon
 export draw_rectangle, find_center, non_colinear_check
