@@ -21,6 +21,8 @@ by other modules such as  `DrawSimpleGraphs` and `HyperbolicPlane`.
 + `draw_arc(a::Complex,b::Complex,c::Complex;opts...)` draws the arc with end points `a` and `c` passing through `b`.
 + `draw_circle(x::Real,y::Real,r::Real;opts...)` draws a circle centered at `(x,y)` with radius `r`. Also `draw_circle(z::Complex,r::Real;opts...)`.
 + `draw_disc` works just like `draw_circle`, but the interior is filled. Try, for example, `draw_disc(0,1,3; color=:yellow, linecolor=:red)`.
++ `draw_ellipse(x, y, rx, ry)` draw an ellipse centered at `(x,y)` with x-radius `rx` and y-radius `ry`. Center may be replaced with a complex number: `draw_ellipse(z, rx, ry)`.
++ `draw_filled_ellipse` is just like `draw_ellipse`, but the interior is colored in. 
 + `draw_curve(pts;opts...)` draws a curve through the points specified by `pts`, a one-dimensional array of complex numbers. By default, this gives a closed curve. To draw an open curve, use `draw_curve(pts,false;opts...)`
 + `draw_rectangle(x::Real,y::Real,xx::Real,yy::Real;opts...)` draws a rectangle with corners `(x,y)` and `(xx,yy)`. Also available as `draw_rectangle(w::Complex,z::Complex)`.
 + `draw_polygon(xs, ys; opts...)` draws a closed polygon based on the lists of  real coordinates `xs` and `ys`. Also available as `draw_polygon(zs; opts)` where `zs`  is a list of complex numbers. 

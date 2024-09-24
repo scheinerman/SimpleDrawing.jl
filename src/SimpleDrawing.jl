@@ -3,6 +3,7 @@ using LinearAlgebra
 using Plots
 
 export newdraw, draw_circle, draw_arc, draw_segment, draw_point, draw_vector, draw_polygon
+export draw_ellipse, draw_filled_ellipse
 export draw_rectangle, find_center, non_colinear_check
 export finish, draw, draw!
 
@@ -81,6 +82,35 @@ end
 
 
 
+"""
+    draw_ellipse(x::Real, y::Real, rx::Real, ry::Real; opts...)
+    draw_ellipse(z::Complex, rx::Real, ry::Real; opts...) 
+
+Draw an axis-parallel ellipse centered at `(x,y)` [at `z`] with x-radius `rx`
+and y-radius `ry`.
+"""
+function draw_ellipse(x::Real, y::Real, rx::Real, ry::Real; opts...)
+    f(t) = rx * cos(t) + x
+    g(t) = ry * sin(t) + y
+    plot!(f, g, 0, 2pi; opts...)
+end
+
+draw_ellipse(z::Complex, rx::Real, ry::Real; opts...) =
+    draw_ellipse(real(z), imag(z), rx, ry; opts...)
+
+
+"""
+    draw_filled_ellipse(x::Real, y::Real, rx::Real, ry::Real; opts...)
+    draw_filled_ellipse(z::Complex, rx::Real, ry::Real; opts...) 
+
+Same as `draw_ellipse` but colored in. 
+"""
+function draw_filled_ellipse(x::Real, y::Real, rx::Real, ry::Real; opts...)
+    draw_ellipse(x, y, rx, ry, fillalpha = 1, seriestype = [:shape]; opts...)
+end
+
+draw_filled_ellipse(z::Complex, rx::Real, ry::Real; opts...) =
+    draw_filled_ellipse(real(z), imag(z), rx::Real, ry::Real; opts...)
 
 """
     draw_arc(x::Real, y::Real, r::Real, t1::Real, t2::Real; opts...)
